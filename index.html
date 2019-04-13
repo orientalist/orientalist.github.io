@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>阿祥WorkShop</title>
+    <link rel="stylesheet" href="public/jquery-ui-1.12.1.custom/jquery-ui.min.css">
     <link rel="stylesheet" href="public/css/main.css">
-    <script src="public/node_modules/jQuery/tmp/jquery.js"></script>
 </head>
 <body>
     <div id="content">
@@ -15,15 +15,10 @@
         </div>
         <div id="contentBody">
             <div id="leftSideMenu">
-                <ul>
-                    <li class="rsRoot"><span data-rs="node">Node.js</span>
+                <ul id="LeftMenu">
+                    <li class="rsRoot"><div data-rs="node">Node.js</div>
                         <ul>
-                            <li><span data-rs="whatIsNode.html">什麼是Node.js</span></li>
-                        </ul>
-                    </li>
-                    <li class="rsRoot"><span data-rs="node">Node.js</span>
-                        <ul>
-                            <li><span data-rs="whatIsNode.html">什麼是Node.js</span></li>
+                            <li><div data-rs="whatIsNode"><span class="page">什麼是Node.js</span></div></li>
                         </ul>
                     </li>
                 </ul>
@@ -32,24 +27,22 @@
         </div>
     </div>
 </body>
+<script src="public/node_modules/jQuery/tmp/jquery.js"></script>
+<script src="public/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script>
     $(document).ready(function(){
-        $("#leftSideMenu span").click(function(e){
-            $("#leftSideMenu ul li ul li").hide();
-            var li=$($(this).parent('li')[0]);
-            li.show();
-            if(li.children('ul').length<=0){
-                var url="";
-                var rss=$(this).offsetParent('.rsRoot').find('span');
-                $.each(rss,function(index,value){
-                    url+=$(value).attr('data-rs')+'/';
-                });
-                url='pages/'+url.substr(0,url.length-1);
-                $("#mainContent").empty();
-                $("#mainContent").load(url);
-            }else{
-                li.children('ul').children('li').show();
+        $("#LeftMenu").menu();
+        $(".page").click(function(){
+            var url="pages/";
+            var lis=$(this).parentsUntil("#LeftMenu");
+            for(be=lis.length-1;be>=0;be--){
+                if(lis[be].tagName==='LI'){
+                    url+=$(lis[be]).children('div').attr('data-rs')+'/';
+                }
             }
+            url=url.substr(0,url.length-1);
+            url+='.html';
+            $("#mainContent").load(url);
         });
     });
 </script>

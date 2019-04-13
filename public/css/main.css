@@ -17,6 +17,3 @@ div{
     height: 100vh;
     width:75vw;
 }
-#leftSideMenu ul li ul li{
-    display: none;
-}
