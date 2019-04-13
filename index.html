@@ -15,8 +15,13 @@
         </div>
         <div id="contentBody">
             <div id="leftSideMenu">
-                <ul class="rsRoot">
-                    <li><span data-rs="node">Node.js</span>
+                <ul>
+                    <li class="rsRoot"><span data-rs="node">Node.js</span>
+                        <ul>
+                            <li><span data-rs="whatIsNode.html">什麼是Node.js</span></li>
+                        </ul>
+                    </li>
+                    <li class="rsRoot"><span data-rs="node">Node.js</span>
                         <ul>
                             <li><span data-rs="whatIsNode.html">什麼是Node.js</span></li>
                         </ul>
@@ -33,7 +38,6 @@
             $("#leftSideMenu ul li ul li").hide();
             var li=$($(this).parent('li')[0]);
             li.show();
-            console.log(li.children('ul').length);
             if(li.children('ul').length<=0){
                 var url="";
                 var rss=$(this).offsetParent('.rsRoot').find('span');
