@@ -4,15 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>歡迎來到阿祥的WorkShop</title>
+    <title>阿祥WorkShop</title>
+    <link rel="stylesheet" href="public/css/main.css">
     <script src="public/node_modules/jQuery/tmp/jquery.js"></script>
 </head>
 <body>
-    
+    <div id="content">
+        <div id="navBar">
+            <div>阿祥WorkShop</div>
+        </div>
+        <div id="contentBody">
+            <div id="leftSideMenu">
+                <ul class="rsRoot">
+                    <li><span data-rs="node">Node.js</span>
+                        <ul>
+                            <li><span data-rs="whatIsNode.html">什麼是Node.js</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="mainContent"></div>
+        </div>
+    </div>
 </body>
 <script>
     $(document).ready(function(){
-        alert('Welcome!');
+        $("#leftSideMenu span").click(function(e){
+            $("#leftSideMenu ul li ul li").hide();
+            var li=$($(this).parent('li')[0]);
+            li.show();
+            console.log(li.children('ul').length);
+            if(li.children('ul').length<=0){
+                var url="";
+                var rss=$(this).offsetParent('.rsRoot').find('span');
+                $.each(rss,function(index,value){
+                    url+=$(value).attr('data-rs')+'/';
+                });
+                url='pages/'+url.substr(0,url.length-1);
+                $("#mainContent").empty();
+                $("#mainContent").load(url);
+            }else{
+                li.children('ul').children('li').show();
+            }
+        });
     });
 </script>
 </html>

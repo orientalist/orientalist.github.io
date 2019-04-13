@@ -1,0 +1,22 @@
+div{
+    border:1px solid black;
+}
+#navBar{
+    height: 50px;
+    width: 100%;
+}
+#contentBody{
+    display: flex;
+    flex-direction: row;
+}
+#leftSideMenu{
+    height: 100vh;
+    width: 25vw;
+}
+#mainContent{
+    height: 100vh;
+    width:75vw;
+}
+#leftSideMenu ul li ul li{
+    display: none;
+}
